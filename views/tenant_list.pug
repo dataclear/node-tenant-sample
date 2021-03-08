@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  .row
+    .col-12
+      if tenants && tenants.length > 0
+        table.table
+          thead
+            th Domain
+            th Status
+            th Company Name
+            th Service Name
+            th
+          tbody
+            each t in tenants
+              tr
+                td #{t.tenantDomain}
+                td #{t.status}
+                td #{t.companyName}
+                td #{t.serviceName}
+                td 
+                  a(href=t.url) View
+                  |  
+                  a(href=t.url+'/edit') Edit
+                  |  
+                  a(href='//'+t.tenantDomain + (port=='80' ? '' : ':'+port)) Switch
+      else
+        p.h2 No Tenants Found
+  .row
+    a.btn.btn-primary(href='/tenants/new') Add Tenant

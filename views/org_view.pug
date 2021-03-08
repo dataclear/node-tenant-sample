@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  .row
+    .col-12
+      if org
+        p Name
+        p #{org.name}
+        p Status
+        p #{org.status}
+      else
+        p.h2 Organisation Not Found
+  .row
+    a.btn.btn-primary(href='/orgs/new') Add Organisation

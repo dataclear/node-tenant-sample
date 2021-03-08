@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  .row
+    .col-12
+      if tenant
+        p Domain
+        p #{tenant.tenantDomain}
+        p Status
+        p #{tenant.status}
+        p Company Name
+        p #{tenant.companyName}
+        p Service Name
+        p #{tenant.serviceName}
+      else
+        p.h2 Tenant Not Found
+  if tenant
+    .row
+      .col-12
+        a.btn.btn-primary(href=tenant.url+'/edit') Edit Tenant

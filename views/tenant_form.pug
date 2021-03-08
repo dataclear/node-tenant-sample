@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  .row
+    .col-12
+      form(method='POST')
+        if tenant
+          input(type='hidden', name='tenantid', value=tenant.id)
+        .form-group
+          label(for='#domain') Domain
+          input.form-control(id='domain', name='domain', type='text', placeholder='abc.example.com', aria-describedby='domainHelp', value=(tenant ? tenant.tenantDomain : ''))
+          small.form-text.text-muted#domainHelp Address the tenant will use to access the service
+        if tenant
+          .form-group
+            label(for='#status') Status
+            select.form-control(id='status', name='status')
+              option(value='active', selected=(tenant.status=='active')) Active
+              option(value='inactive', selected=(tenant.status=='inactive')) Inactive
+              option(value='deleted', selected=(tenant.status=='deleted')) Deleted
+        .form-group
+          label(for='#companyName') Company Name
+          input.form-control(id='companyName', name='companyName', type='text', placeholder='Example Ltd', aria-describedby='companyNameHelp', value=(tenant ? tenant.companyName : ''))
+          small.form-text.text-muted#companyNameHelp Full company name of tenant
+        .form-group
+          label(for='#serviceName') Service Name
+          input.form-control(id='serviceName', name='serviceName', type='text', placeholder='Example Storage', aria-describedby='serviceNameHelp', value=(tenant ? tenant.serviceName : ''))
+          small.form-text.text-muted#serviceNameHelp Service name for users logging into the company service
+        button.btn.btn-primary(type='submit') #{tenant ? 'Save' : 'Add'} Tenant
+        

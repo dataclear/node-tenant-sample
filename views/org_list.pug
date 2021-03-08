@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  .row
+    .col-12
+      if orgs
+        table.table
+          thead
+            th Name
+            th Status
+            th Actions
+          tbody
+            each o in orgs
+              tr
+                td #{o.name}
+                td #{o.status}
+                td 
+                  a(href=o.url) View
+                  | 
+                  a(href=o.url+'/edit') Edit
+                  | 
+                  a(href=o.url+'/addresses') Addresses
+      else
+        p.h2 No Organisations Found
+  .row
+    a.btn.btn-primary(href='/orgs/new') Add Organisation

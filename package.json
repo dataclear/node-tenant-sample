@@ -1,11 +1,36 @@
 {
   "name": "tenant-sample",
   "version": "1.0.0",
+  "private": true,
   "description": "Sample tentant application using mongoDB discriminators",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node -r dotenv/config ./bin/www",
+    "startmon": "nodemon -r dotenv/config ./bin/www"
   },
   "author": "Dataclear Ltd",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cls-hooked": "^4.2.2",
+    "connect-ensure-login": "^0.1.1",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^4.2.2",
+    "cookie-parser": "^1.4.5",
+    "debug": "^4.3.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "http-errors": "^1.8.0",
+    "moment": "^2.29.1",
+    "mongoose": "^5.11.19",
+    "morgan": "^1.10.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "pug": "^3.0.2",
+    "serve-favicon": "^2.5.0"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  }
 }

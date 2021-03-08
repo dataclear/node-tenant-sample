@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  
+  if tenant
+    h1 Welcome to #{tenant.serviceName}
+  else
+    h1 Welcome to Customer Portal
+  if tenant && tenant.id == 'base'
+    - console.log(localUser)
+    if localUser && localUser.globalAdmin
+      a.btn.btn-primary(href='/tenants') Manage Tenants
+    else
+      if localUser && localUser.domainAccess && localUser.domainAccess.length > 0
+        - console.log(localUser.domainAccess)
+        p Switch to tenant:
+        ul.list-group
+          each d in localUser.domainAccess
+
+            
+            if (d.tenant && d.tenant.domain)
+              li.list-group-item 
+                span #{d.tenant.domain}
+                a.btn.btn-sm(href='//' + d.tenant.domain) View
+          
+  else
+    a.btn.btn-primary(href='/orgs') Manage Organisations

@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  .row
+    .col-12
+      form(method='POST')
+        if org
+          input(type='hidden', name='orgid', value=org.id)
+        .form-group
+          label(for='#name') Name
+          input.form-control(id='name', name='name', type='text', placeholder='Example Ltd', aria-describedby='nameHelp', value=(org ? org.name : ''))
+          small.form-text.text-muted#nameHelp The company name, this will be used in e-mails as well as when users from this organisation log in.
+        if org
+          .form-group
+            label(for='#status') Status
+            select.form-control(id='status', name='status')
+              option(value='active', selected=(org.status=='active')) Active
+              option(value='inactive', selected=(org.status=='inactive')) Inactive
+              option(value='deleted', selected=(org.status=='deleted')) Deleted
+        button.btn.btn-primary(type='submit') #{org ? 'Save' : 'Add'} Organisation
+        

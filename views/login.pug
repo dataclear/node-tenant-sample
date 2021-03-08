@@ -1,0 +1,24 @@
+extends layout-nonav
+
+block content
+  .row.justify-content-center.mt-5
+    .col-lg-8.col-xl-6
+      if tenant
+        p.h1 Login to #{tenant.serviceName}
+      else
+        p.h1 Login to Customer Portal
+      .card.mt-3
+        article.card-body
+          a.float-right.btn.btn-outline-primary(href='') Sign up
+          h4.card-title.mb-4.mt-1 Sign in
+          form(method='POST')
+            .form-group
+              input.form-control(name='email', placeholder='Email', type='email')
+            .form-group
+              input.form-control(name='password', placeholder='******', type='password')
+            .row
+              .col-md-6
+                .form-group
+                  button.btn.btn-primary.btn-block(type='submit')  Login  
+              .col-md-6.text-right
+                a.small(href='#') Forgot password?
