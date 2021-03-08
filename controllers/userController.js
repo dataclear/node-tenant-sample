@@ -1,11 +1,11 @@
-const UserModel = require('../models/userModel')();
+const UserModel = require('../models/userModel');
 
 
 exports.checkLogin = async (email, provider, done) => {
 
   try {
 
-    let foundUser = await UserModel.findOne({provider: provider, email: email})
+    let foundUser = await UserModel().findOne({provider: provider, email: email})
       .populate('domainAccess.tenant')
       .exec();
 
@@ -21,7 +21,7 @@ exports.checkLogin = async (email, provider, done) => {
 
 exports.createUser = async (provider, email, password) => {
 
-  let newUser = new UserModel({
+  let newUser = new UserModel()({
     provider: provider,
     email: email,
     password: password

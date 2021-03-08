@@ -2,7 +2,7 @@ const nameSpace = require('./namespaceController');
 const flash = require('connect-flash');
 
 // tenant model
-const tenantModel = require('../models/tenantModel')();
+const tenantModel = require('../models/tenantModel');
 
 exports.setTenant = async (req, res, next) => {
 
@@ -47,7 +47,7 @@ exports.setTenant = async (req, res, next) => {
       
     // tenancy not set, retrieve from database (we'll check if user can access tenant later)
       
-    let foundTenant = await tenantModel.findOne({tenantDomain: host}).exec();
+    let foundTenant = await tenantModel().findOne({tenantDomain: host}).exec();
 
     if (!foundTenant){
       return next(new Error('Invalid host ' + host));
@@ -120,7 +120,7 @@ exports.ensureTenantAccess = (redirect) => {
 
 exports.getTenants = async () => {
 
-  let foundTenants = await tenantModel.find({status: 'active'});
+  let foundTenants = await tenantModel().find({status: 'active'});
 
   return foundTenants;
 
@@ -128,7 +128,7 @@ exports.getTenants = async () => {
 
 exports.getTenantById = async (tenantId) => {
 
-  let foundTenant = await tenantModel.findById(tenantId);
+  let foundTenant = await tenantModel().findById(tenantId);
 
   return foundTenant;
 
@@ -136,7 +136,7 @@ exports.getTenantById = async (tenantId) => {
 
 exports.createTenant = async (newTenantObject) => {
 
-  let newTenant = new tenantModel(newTenantObject);
+  let newTenant = new tenantModel()(newTenantObject);
 
   let savedTenant = await newTenant.save();
 
@@ -146,7 +146,7 @@ exports.createTenant = async (newTenantObject) => {
 
 exports.updateTenant = async (tenantId, updateTenantObject) => {
 
-  let foundTenant = await tenantModel.findById(tenantId);
+  let foundTenant = await tenantModel().findById(tenantId);
 
   foundTenant.tenantDomain = updateTenantObject.tenantDomain;
   foundTenant.status = updateTenantObject.status;

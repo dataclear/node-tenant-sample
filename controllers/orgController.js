@@ -1,8 +1,8 @@
-const orgModel = require('../models/orgModel')();
+const orgModel = require('../models/orgModel');
 
 exports.getOrgById = (id, done) => {
   if (id) {
-    orgModel.findById(id, (err, foundOrg) => {
+    orgModel().findById(id, (err, foundOrg) => {
       if (err){return done(err, null);}
 
       return done(null, foundOrg);
@@ -14,14 +14,14 @@ exports.getOrgById = (id, done) => {
 
 exports.getAllOrgs = async () => {
   
-  let foundOrgs = await orgModel.find();
+  let foundOrgs = await orgModel().find();
   return foundOrgs;
 
 };
 
 exports.createOrg = async (name, type) => {
 
-  let newOrg = orgModel({
+  let newOrg = orgModel()({
     name: name,
     type: type
   });
@@ -29,12 +29,12 @@ exports.createOrg = async (name, type) => {
   let savedOrg = await newOrg.save();
 
   return savedOrg;
-  
+
 };
 
 exports.updateOrg = async (id, name, status) => {
   
-  let foundOrg = await orgModel.findById(id);
+  let foundOrg = await orgModel().findById(id);
 
   foundOrg.name = name;
   foundOrg.status = status;

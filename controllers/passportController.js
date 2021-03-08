@@ -1,11 +1,11 @@
-let UserModel = require('../models/userModel')();
+let UserModel = require('../models/userModel');
 let TenantModel = require('../models/tenantModel')();
 
 exports.passportLogin = async (email, password, done) => {
 
   try {
     
-    let user = await UserModel.findOne({email: email});
+    let user = await UserModel().findOne({email: email});
 
     // return same message for incorrect username or password to avoid exposing username
     if (!user) { return done(null, false, 'Username or password incorrect'); }
@@ -34,7 +34,7 @@ exports.deserializeUser = async (user, done) => {
   
   try {
   
-    let foundUser = await UserModel.findById(user._id).populate('domainAccess.tenant');
+    let foundUser = await UserModel().findById(user._id).populate('domainAccess.tenant');
   
     done(null, foundUser);
 
